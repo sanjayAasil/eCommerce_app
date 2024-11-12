@@ -1,6 +1,5 @@
 import 'package:ecommerce_app/view/home/product_body.dart';
 import 'package:flutter/material.dart';
-
 import 'cart_body.dart';
 
 class HomePage extends StatefulWidget {

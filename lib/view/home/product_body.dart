@@ -1,7 +1,7 @@
 import 'package:ecommerce_app/model/product_model.dart';
 import 'package:ecommerce_app/service/api_service.dart';
+import 'package:ecommerce_app/view/provider/dataManager.dart';
 import 'package:flutter/material.dart';
-
 import '../widget/product_tile.dart';
 
 class ProductBody extends StatefulWidget {
@@ -17,13 +17,16 @@ class _ProductBodyState extends State<ProductBody> {
 
   @override
   void initState() {
-    print('checklk homeBody init');
     _fetchData();
     super.initState();
   }
 
   _fetchData() async {
-    products = await ApiService().getProducts();
+    if (DataManager().products.isEmpty) {
+      DataManager().products = (await ApiService().getProducts());
+    }
+
+    products = (DataManager().products);
     isLoading = false;
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }

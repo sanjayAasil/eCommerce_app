@@ -21,7 +21,6 @@ class ApiService {
 
       if (res.statusCode == 200) {
         List data = jsonDecode(res.body);
-
         return data.map((e) => Product(e)).toList();
       } else {
         print('Error fetching api results...Client Exception');
