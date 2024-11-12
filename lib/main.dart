@@ -1,10 +1,10 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:ecommerce_app/common/global.dart';
+import 'package:ecommerce_app/provider/dataManager.dart';
 import 'package:ecommerce_app/service/network_connectivity_service.dart';
 import 'package:ecommerce_app/view/home/home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:ecommerce_app/';
-
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,16 +25,23 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        appBarTheme: const AppBarTheme(
-          foregroundColor: Colors.blue,
-        ),
-      ),
-      home: const HomePage(),
-      navigatorKey: navigatorKey,
+    DataManager dataManager = DataManager();
+    return ChangeNotifierProvider(
+      create: (context) => dataManager,
+      builder: (context, dataManager) {
+        context.watch<DataManager>();
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            appBarTheme: const AppBarTheme(
+              foregroundColor: Colors.blue,
+            ),
+          ),
+          home: const HomePage(),
+          navigatorKey: navigatorKey,
+        );
+      },
     );
   }
 }

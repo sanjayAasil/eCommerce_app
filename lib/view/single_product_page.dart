@@ -115,11 +115,11 @@ class _SingleProductPageState extends State<SingleProductPage> {
 
   _onAddToCart() {
     if (DataManager().cartProductIds.contains(widget.product.id)) {
-      DataManager().cartProductIds.remove(widget.product.id);
+      DataManager().removeCartIds(widget.product.id);
       isAddedToCart = false;
       print('checkkk ygybywebf yb nefb ${DataManager().cartProductIds.length}');
     } else {
-      DataManager().cartProductIds.add(widget.product.id);
+      DataManager().addCartProductIds(widget.product.id);
       isAddedToCart = true;
       print('checkkk ygybywebf yb wefb ${DataManager().cartProductIds.length}');
     }

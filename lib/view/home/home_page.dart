@@ -15,6 +15,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    print('checkk home page build');
     return Scaffold(
       appBar: AppBar(
         title: _selectedIndex == 0 ? const Text('eCommerce App') : const Text('Cart Details'),
