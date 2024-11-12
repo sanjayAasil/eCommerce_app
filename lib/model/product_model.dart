@@ -7,6 +7,8 @@ class Product {
 
   String get title => json['title'];
 
+  dynamic get price => json['price'];
+
   String get description => json['description'];
 
   String get category => json['category'];

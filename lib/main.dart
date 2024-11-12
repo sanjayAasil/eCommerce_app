@@ -1,11 +1,20 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:ecommerce_app/common/global.dart';
 import 'package:ecommerce_app/service/network_connectivity_service.dart';
 import 'package:ecommerce_app/view/home/home_page.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await ConnectivityService().init();
+
+  if (ConnectivityService().connectionStatus.contains(ConnectivityResult.none)) {
+    print('No internet connection...main() returned');
+    return;
+  }
+
   runApp(const MyApp());
-  ConnectivityService().init();
 }
 
 class MyApp extends StatelessWidget {
@@ -15,6 +24,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(),
       home: const HomePage(),

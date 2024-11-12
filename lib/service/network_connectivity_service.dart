@@ -28,7 +28,7 @@ class ConnectivityService {
   Future<void> _connectionStreamSubscription() async {
     _connectivity.onConnectivityChanged.listen((_) async {
       connectionStatus = await _connectivity.checkConnectivity();
-      print('checkkk connectivity  ${connectionStatus}');
+      print('check connectivity  $connectionStatus');
       if (navigatorKey.currentState != null) {
         BuildContext context = navigatorKey.currentState!.context;
 
