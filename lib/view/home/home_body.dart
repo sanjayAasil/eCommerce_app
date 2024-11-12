@@ -34,16 +34,10 @@ class _HomeBodyState extends State<HomeBody> {
         ? const Center(
             child: CircularProgressIndicator(),
           )
-        : GridView.builder(
+        : ListView.builder(
             itemCount: products.length,
             itemBuilder: (context, index) => ProductTile(
               product: products[index],
-            ),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
-              childAspectRatio: 3/4,
             ),
           );
   }

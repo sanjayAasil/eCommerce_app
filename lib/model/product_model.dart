@@ -23,7 +23,7 @@ class Rating {
 
   Rating(this.json);
 
-  String get rate => json['rate'];
+  dynamic get rate => json['rate'];
 
-  String get count => json['count'];
+  int get count => json['count'];
 }
