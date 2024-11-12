@@ -26,7 +26,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(),
+      theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+          foregroundColor: Colors.blue,
+        ),
+      ),
       home: const HomePage(),
       navigatorKey: navigatorKey,
     );

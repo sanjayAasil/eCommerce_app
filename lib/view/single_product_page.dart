@@ -88,6 +88,14 @@ class _SingleProductPageState extends State<SingleProductPage> {
           ),
         ),
       ),
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.yellow.shade700,
+        ),
+        height: 50,
+         child: const Center(child: Text('Add to Cart')),
+      ),
     );
   }
 }

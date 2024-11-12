@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 
 import '../widget/product_tile.dart';
 
-class HomeBody extends StatefulWidget {
-  const HomeBody({super.key});
+class ProductBody extends StatefulWidget {
+  const ProductBody({super.key});
 
   @override
-  State<HomeBody> createState() => _HomeBodyState();
+  State<ProductBody> createState() => _ProductBodyState();
 }
 
-class _HomeBodyState extends State<HomeBody> {
+class _ProductBodyState extends State<ProductBody> {
   bool isLoading = true;
   late List<Product> products;
 
@@ -25,7 +25,7 @@ class _HomeBodyState extends State<HomeBody> {
   _fetchData() async {
     products = await ApiService().getProducts();
     isLoading = false;
-    setState(() {});
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
