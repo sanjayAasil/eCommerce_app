@@ -3,7 +3,7 @@ class Product {
 
   Product(this.json);
 
-  String get id => json['id'];
+  int get id => json['id'];
 
   String get title => json['title'];
 

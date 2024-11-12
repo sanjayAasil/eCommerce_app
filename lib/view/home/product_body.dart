@@ -1,7 +1,7 @@
 import 'package:ecommerce_app/model/product_model.dart';
 import 'package:ecommerce_app/service/api_service.dart';
-import 'package:ecommerce_app/view/provider/dataManager.dart';
 import 'package:flutter/material.dart';
+import '../../provider/dataManager.dart';
 import '../widget/product_tile.dart';
 
 class ProductBody extends StatefulWidget {
@@ -23,10 +23,10 @@ class _ProductBodyState extends State<ProductBody> {
 
   _fetchData() async {
     if (DataManager().products.isEmpty) {
-      DataManager().products = (await ApiService().getProducts());
+      DataManager().addProducts(await ApiService().getProducts());
     }
 
-    products = (DataManager().products);
+    products = DataManager().products;
     isLoading = false;
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }

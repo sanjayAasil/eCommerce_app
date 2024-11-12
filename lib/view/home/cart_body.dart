@@ -1,7 +1,7 @@
 import 'package:ecommerce_app/model/product_model.dart';
-import 'package:ecommerce_app/view/provider/dataManager.dart';
 import 'package:ecommerce_app/view/widget/product_tile.dart';
 import 'package:flutter/material.dart';
+import '../../provider/dataManager.dart';
 
 class CartBody extends StatefulWidget {
   const CartBody({super.key});
@@ -15,7 +15,7 @@ class _CartBodyState extends State<CartBody> {
 
   @override
   void initState() {
-    products = DataManager().products;
+    products = DataManager().products.where((product) => DataManager().cartProductIds.contains(product.id)).toList();
     super.initState();
   }
 

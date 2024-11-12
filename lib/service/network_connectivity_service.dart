@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:ecommerce_app/common/global.dart';
 import 'package:flutter/material.dart';

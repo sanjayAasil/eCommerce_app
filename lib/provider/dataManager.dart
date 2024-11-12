@@ -8,6 +8,14 @@ class DataManager extends ChangeNotifier {
 
   factory DataManager() => _instance;
 
-  List<Product> products = [];
+  List<Product> _products = [];
 
+  List<int> cartProductIds = [];
+
+  List<Product> get products => _products;
+
+  void addProducts(List<Product> products) {
+    _products.addAll(products);
+    notifyListeners();
+  }
 }

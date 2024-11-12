@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce_app/model/product_model.dart';
 import 'package:flutter/material.dart';
+import 'package:ecommerce_app/provider/dataManager.dart';
 
 class SingleProductPage extends StatefulWidget {
   final Product product;
@@ -12,6 +13,14 @@ class SingleProductPage extends StatefulWidget {
 }
 
 class _SingleProductPageState extends State<SingleProductPage> {
+  late bool isAddedToCart;
+
+  @override
+  void initState() {
+    isAddedToCart = DataManager().cartProductIds.contains(widget.product.id);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,14 +97,32 @@ class _SingleProductPageState extends State<SingleProductPage> {
           ),
         ),
       ),
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: Colors.yellow.shade700,
+      bottomNavigationBar: InkWell(
+        onTap: _onAddToCart,
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: isAddedToCart ? Colors.red : Colors.yellow.shade700,
+          ),
+          height: 50,
+          child: Center(
+            child: isAddedToCart ? const Text('Remove from Cart') : const Text('Add to Cart'),
+          ),
         ),
-        height: 50,
-         child: const Center(child: Text('Add to Cart')),
       ),
     );
+  }
+
+  _onAddToCart() {
+    if (DataManager().cartProductIds.contains(widget.product.id)) {
+      DataManager().cartProductIds.remove(widget.product.id);
+      isAddedToCart = false;
+      print('checkkk ygybywebf yb nefb ${DataManager().cartProductIds.length}');
+    } else {
+      DataManager().cartProductIds.add(widget.product.id);
+      isAddedToCart = true;
+      print('checkkk ygybywebf yb wefb ${DataManager().cartProductIds.length}');
+    }
+    setState(() {});
   }
 }
