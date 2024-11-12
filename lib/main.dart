@@ -1,8 +1,11 @@
+import 'package:ecommerce_app/common/global.dart';
+import 'package:ecommerce_app/service/network_connectivity_service.dart';
 import 'package:ecommerce_app/view/home/home_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
+  ConnectivityService().init();
 }
 
 class MyApp extends StatelessWidget {
@@ -15,6 +18,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(),
       home: const HomePage(),
+      navigatorKey: navigatorKey,
     );
   }
 }
