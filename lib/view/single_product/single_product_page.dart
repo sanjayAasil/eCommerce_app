@@ -1,5 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ecommerce_app/common/global.dart';
 import 'package:ecommerce_app/model/product_model.dart';
+import 'package:ecommerce_app/view/single_product/sign_in_alert_dialog.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_app/provider/dataManager.dart';
 
@@ -113,15 +117,24 @@ class _SingleProductPageState extends State<SingleProductPage> {
     );
   }
 
-  _onAddToCart() {
+  _onAddToCart() async {
+    if (FirebaseAuth.instance.currentUser == null) {
+      await showDialog(
+        context: context,
+        builder: (context) => const SignInAlertDialog(),
+      );
+
+      if (FirebaseAuth.instance.currentUser == null) return;
+    }
+
     if (DataManager().cartProductIds.contains(widget.product.id)) {
       DataManager().removeCartIds(widget.product.id);
       isAddedToCart = false;
-      print('checkkk ygybywebf yb nefb ${DataManager().cartProductIds.length}');
+      showCommonToast('Product removed from cart');
     } else {
       DataManager().addCartProductIds(widget.product.id);
       isAddedToCart = true;
-      print('checkkk ygybywebf yb wefb ${DataManager().cartProductIds.length}');
+      showCommonToast('Product added to cart');
     }
     setState(() {});
   }

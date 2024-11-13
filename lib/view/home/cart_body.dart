@@ -18,11 +18,15 @@ class _CartBodyState extends State<CartBody> {
   Widget build(BuildContext context) {
     products = DataManager().products.where((product) => DataManager().cartProductIds.contains(product.id)).toList();
     context.watch<DataManager>();
-    return ListView.builder(
-      itemCount: products.length,
-      itemBuilder: (context, index) => ProductTile(
-        product: products[index],
-      ),
-    );
+    return products.isNotEmpty
+        ? ListView.builder(
+            itemCount: products.length,
+            itemBuilder: (context, index) => ProductTile(
+              product: products[index],
+            ),
+          )
+        : const Center(
+            child: Text('No Products added yet'),
+          );
   }
 }

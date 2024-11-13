@@ -37,10 +37,18 @@ class _ProductBodyState extends State<ProductBody> {
         ? const Center(
             child: CircularProgressIndicator(),
           )
-        : ListView.builder(
-            itemCount: products.length,
-            itemBuilder: (context, index) => ProductTile(
-              product: products[index],
+        : RefreshIndicator(
+            onRefresh: () async {
+              setState(() => isLoading = true);
+              DataManager().products.clear();
+              DataManager().addProducts(await ApiService().getProducts());
+              setState(() => isLoading = false);
+            },
+            child: ListView.builder(
+              itemCount: products.length,
+              itemBuilder: (context, index) => ProductTile(
+                product: products[index],
+              ),
             ),
           );
   }

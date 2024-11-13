@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import '../../model/product_model.dart';
-import '../single_product_page.dart';
+import '../single_product/single_product_page.dart';
 
 class ProductTile extends StatelessWidget {
   final Product product;
