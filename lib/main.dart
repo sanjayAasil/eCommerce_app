@@ -2,14 +2,22 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:ecommerce_app/common/global.dart';
 import 'package:ecommerce_app/provider/dataManager.dart';
 import 'package:ecommerce_app/service/network_connectivity_service.dart';
+import 'package:ecommerce_app/view/auth/login_page.dart';
 import 'package:ecommerce_app/view/home/home_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'firebase_options.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await ConnectivityService().init();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   if (ConnectivityService().connectionStatus.contains(ConnectivityResult.none)) {
     print('No internet connection...main() returned');
@@ -38,7 +46,7 @@ class MyApp extends StatelessWidget {
               foregroundColor: Colors.blue,
             ),
           ),
-          home: const HomePage(),
+          home: FirebaseAuth.instance.currentUser == null ? const LoginPage() : const HomePage(),
           navigatorKey: navigatorKey,
         );
       },

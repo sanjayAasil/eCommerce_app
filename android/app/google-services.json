@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "500034583652",
+    "project_id": "ecommerce-app-cd1dd",
+    "storage_bucket": "ecommerce-app-cd1dd.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:500034583652:android:bf549a0607dfd06b54f371",
+        "android_client_info": {
+          "package_name": "com.example.ecommerce_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "500034583652-lkt8d5k1gs1nf8ip1jj7k26085i2srev.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ecommerce_app",
+            "certificate_hash": "43ac8c1a9e45d0ef1ec3b21b239eeda2cc8fa4c8"
+          }
+        },
+        {
+          "client_id": "500034583652-06jtt222igbbsv1726dljer9morrlmbk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtOaB_O04wXELjy3hreJuXsR4iOH5nLaU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "500034583652-06jtt222igbbsv1726dljer9morrlmbk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

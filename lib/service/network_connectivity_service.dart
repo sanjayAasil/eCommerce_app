@@ -28,20 +28,12 @@ class ConnectivityService {
     _connectivity.onConnectivityChanged.listen((_) async {
       connectionStatus = await _connectivity.checkConnectivity();
       print('check connectivity  $connectionStatus');
-      if (navigatorKey.currentState != null) {
-        BuildContext context = navigatorKey.currentState!.context;
 
-        if (connectionStatus.contains(ConnectivityResult.none)) {
-          if (context.mounted) {
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('No Internet Connection')));
-          }
-        }
-        if (connectionStatus.contains(ConnectivityResult.wifi) ||
-            connectionStatus.contains(ConnectivityResult.mobile)) {
-          if (context.mounted) {
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Connected to Internet')));
-          }
-        }
+      if (connectionStatus.contains(ConnectivityResult.none)) {
+        showCommonToast('No Internet Connection');
+      }
+      if (connectionStatus.contains(ConnectivityResult.wifi) || connectionStatus.contains(ConnectivityResult.mobile)) {
+        showCommonToast('Connected to Internet');
       }
     });
   }

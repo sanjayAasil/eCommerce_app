@@ -1,4 +1,7 @@
+import 'package:ecommerce_app/service/firebase_auth.dart';
+import 'package:ecommerce_app/view/auth/login_page.dart';
 import 'package:ecommerce_app/view/home/product_body.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'cart_body.dart';
 
@@ -15,10 +18,18 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    print('checkk home page build');
     return Scaffold(
       appBar: AppBar(
         title: _selectedIndex == 0 ? const Text('eCommerce App') : const Text('Cart Details'),
+        actions: [
+          if (FirebaseAuth.instance.currentUser != null)
+            TextButton(
+                onPressed: () {
+                  FirebaseAuthManager().signOut();
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const LoginPage()));
+                },
+                child: const Text('Logout'))
+        ],
       ),
       body: PageView(
         onPageChanged: _onHomePageSelected,

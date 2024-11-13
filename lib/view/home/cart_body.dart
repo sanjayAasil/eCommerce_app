@@ -1,4 +1,3 @@
-import 'package:ecommerce_app/main.dart';
 import 'package:ecommerce_app/model/product_model.dart';
 import 'package:ecommerce_app/view/widget/product_tile.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +18,6 @@ class _CartBodyState extends State<CartBody> {
   Widget build(BuildContext context) {
     products = DataManager().products.where((product) => DataManager().cartProductIds.contains(product.id)).toList();
     context.watch<DataManager>();
-    print('checkkk cart body build');
     return ListView.builder(
       itemCount: products.length,
       itemBuilder: (context, index) => ProductTile(
