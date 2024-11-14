@@ -1,5 +1,4 @@
-import 'package:ecommerce_app/main.dart';
-import 'package:ecommerce_app/provider/dataManager.dart';
+ import 'package:ecommerce_app/provider/dataManager.dart';
 import 'package:ecommerce_app/service/firebase_auth.dart';
 import 'package:ecommerce_app/view/auth/login_page.dart';
 import 'package:ecommerce_app/view/home/product_body.dart';

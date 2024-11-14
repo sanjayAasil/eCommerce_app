@@ -12,7 +12,11 @@ class DataManager extends ChangeNotifier {
 
   final List<int> _cartProductIds = [];
 
+  final List<int> _boughtProductIds = [];
+
   List<int> get cartProductIds => _cartProductIds;
+
+  List<int> get boughtProductIds => _boughtProductIds;
 
   List<Product> get products => _products;
 
@@ -21,13 +25,29 @@ class DataManager extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addCartProductIds(int id) {
+  void addCartProductId(int id) {
     _cartProductIds.add(id);
     notifyListeners();
   }
 
-  void removeCartIds(int id) {
+  void removeCartId(int id) {
     _cartProductIds.remove(id);
+    notifyListeners();
+  }
+
+  void addBoughtProductId(int id) {
+    _boughtProductIds.add(id);
+    notifyListeners();
+  }
+
+  void removeBoughtId(int id) {
+    _boughtProductIds.remove(id);
+    notifyListeners();
+  }
+
+  void removeAllCartIds() {
+    cartProductIds.clear();
+    print('checkkkkwief uhwe fuh uiwef ${cartProductIds.length}');
     notifyListeners();
   }
 }

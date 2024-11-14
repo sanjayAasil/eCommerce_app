@@ -18,10 +18,12 @@ class SingleProductPage extends StatefulWidget {
 
 class _SingleProductPageState extends State<SingleProductPage> {
   late bool isAddedToCart;
+  late bool isBought;
 
   @override
   void initState() {
     isAddedToCart = DataManager().cartProductIds.contains(widget.product.id);
+    isBought = DataManager().boughtProductIds.contains(widget.product.id);
     super.initState();
   }
 
@@ -101,18 +103,42 @@ class _SingleProductPageState extends State<SingleProductPage> {
           ),
         ),
       ),
-      bottomNavigationBar: InkWell(
-        onTap: _onAddToCart,
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: isAddedToCart ? Colors.red : Colors.yellow.shade700,
+      bottomNavigationBar: Row(
+        children: [
+          if(!isBought)
+          Expanded(
+            child: InkWell(
+              onTap: _onAddToCart,
+              child: Container(
+                margin: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: isAddedToCart ? Colors.red : Colors.yellow.shade700,
+                ),
+                height: 50,
+                child: Center(
+                  child: isAddedToCart ? const Text('Remove from Cart') : const Text('Add to Cart'),
+                ),
+              ),
+            ),
           ),
-          height: 50,
-          child: Center(
-            child: isAddedToCart ? const Text('Remove from Cart') : const Text('Add to Cart'),
+          Expanded(
+            child: InkWell(
+              onTap: _onTapBuy,
+              child: Container(
+                margin: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: isBought ? Colors.grey : Colors.green,
+                ),
+                height: 50,
+                child: Center(
+                  child: isBought ? const Text('Purchased') : const Text('Buy Now'),
+                ),
+              ),
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
@@ -128,13 +154,38 @@ class _SingleProductPageState extends State<SingleProductPage> {
     }
 
     if (DataManager().cartProductIds.contains(widget.product.id)) {
-      DataManager().removeCartIds(widget.product.id);
+      DataManager().removeCartId(widget.product.id);
       isAddedToCart = false;
       showCommonToast('Product removed from cart');
     } else {
-      DataManager().addCartProductIds(widget.product.id);
+      DataManager().addCartProductId(widget.product.id);
       isAddedToCart = true;
       showCommonToast('Product added to cart');
+    }
+    setState(() {});
+  }
+
+  void _onTapBuy() async {
+    if (FirebaseAuth.instance.currentUser == null) {
+      await showDialog(
+        context: context,
+        builder: (context) => const SignInAlertDialog(),
+      );
+
+      if (FirebaseAuth.instance.currentUser == null) return;
+    }
+
+    if (DataManager().cartProductIds.contains(widget.product.id)) {
+      DataManager().removeCartId(widget.product.id);
+      isAddedToCart = false;
+    }
+
+    if (DataManager().boughtProductIds.contains(widget.product.id)) {
+      DataManager().removeBoughtId(widget.product.id);
+      isBought = false;
+    } else {
+      DataManager().addBoughtProductId(widget.product.id);
+      isBought = true;
     }
     setState(() {});
   }
