@@ -1,4 +1,4 @@
- import 'package:ecommerce_app/provider/dataManager.dart';
+import 'package:ecommerce_app/provider/dataManager.dart';
 import 'package:ecommerce_app/service/firebase_auth.dart';
 import 'package:ecommerce_app/view/auth/login_page.dart';
 import 'package:ecommerce_app/view/home/product_body.dart';
@@ -24,9 +24,13 @@ class _HomePageState extends State<HomePage> {
     context.watch<DataManager>();
     return Scaffold(
       appBar: AppBar(
-        title: _selectedIndex == 0 ? const Text('eCommerce App') : const Text('Cart Details'),
+        title: _selectedIndex == 0
+            ? const Text('eCommerce App')
+            : _selectedIndex == 1
+                ? const Text('Cart Details')
+                : const Text('Order Details'),
         actions: [
-          if (FirebaseAuth.instance.currentUser != null)
+          if (FirebaseAuth.instance.currentUser != null && _selectedIndex == 0)
             TextButton(onPressed: _onTapLogout, child: const Text('Logout'))
         ],
       ),
